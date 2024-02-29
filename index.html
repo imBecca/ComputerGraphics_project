@@ -1,10 +1,8 @@
-
-
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/style.css">
   </link>
-  <title>Mouse in the Odyssey</title>
+  <title>Salva l'occhio</title>
 </head>
 
 <body>
@@ -12,9 +10,10 @@
     var texture_enable = false;
   </script>
   <div class="container">
-    <canvas width="1115" height="550" id="text"></canvas>>
+    <canvas width="1100" height="500" id="text"></canvas>
     <canvas width="1100" height="500" id="myCanvas"></canvas>
   </div>
+  
 
   <div id="uiContainer">
     <div id="LightX"></div>
@@ -31,14 +30,14 @@
         <label for="shadow5">Render senza ombre</label>
       </div>
       <div id="bottoni">
-        <div id="visuale">
+        <div id="visuale6">
           <h2>Cambia Visuale </h2>
         </div>
         <input type="button" id="button1" value="Posteriore"
-          onclick="cambiaCamera=false;cameraLiberabis = false;cameraAlto=false; cameraLibera=false; camera_posteriore=true">
+          onclick="cambiaCamera=false;cameraL2 = false;cameraA=false; cameraL=false; cameraP=true">
         <input type="button" id="button2" value="Anteriore"
-          onclick="cambiaCamera=true;cameraLiberabis = false;cameraAlto=false;cameraLibera=false;camera_posteriore=true">
-        <input type="button" id="button3" value="Dall'alto" onclick="cameraAlto=true;cameraLiberabis = false;camera_posteriore=true">
+          onclick="cambiaCamera=true;cameraL2 = false;cameraA=false;cameraL=false;cameraP=true">
+        <input type="button" id="button3" value="Dall'alto" onclick="cameraA=true;cameraL2 = false;cameraP=true">
       </div>
     </div>
     <div id="webgl-info"></div>
@@ -48,25 +47,12 @@
   var canvas = document.getElementById("myCanvas");
   var text = document.getElementById("text");
   var gl = canvas.getContext("webgl");
-if (!gl) {
-    console.error("Impossibile inizializzare il contesto WebGL. Il tuo browser potrebbe non supportarlo.");
-} else {
-    console.log("Contesto WebGL inizializzato con successo:", gl);
-    // Aggiorna il contenuto del div con le informazioni WebGL
-    var webglInfoDiv = document.getElementById("webgl-info");
-    webglInfoDiv.textContent = "Contesto WebGL inizializzato con successo: " + gl;
-}
-
-
   const textCanvas = document.getElementById("text");
   const ctx = textCanvas.getContext("2d");
-
-  //ext serve per la depth texture, se no diventa tutto nero
   var ext = gl.getExtension('WEBGL_depth_texture');
   if (!ext) {
     console.log("NON SUPPORTA WEBGL_depth_texture");  // eslint-disable-line
   }
-
   var bufferSize = gl.getBufferParameter(gl.ARRAY_BUFFER, gl.BUFFER_SIZE);
 </script>
 
@@ -85,11 +71,4 @@ if (!gl) {
 <script src="stanza/shaders.js" deref></script>
 <script src="stanza/mouseMoviment.js" deref></script>
 <script src="main.js"></script>
-
-
-<script>
-
-
-</script>
-
 </html>

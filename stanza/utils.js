@@ -28,12 +28,12 @@ function loadSkyboxTexture() {
 					{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, url: 'resources/images/prova.jpg',},
 					];*/
 
-	const faceInfos = [{target: gl.TEXTURE_CUBE_MAP_POSITIVE_X, url: '../oggetti/sfondo.png',},
-	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_X, url: '../oggetti/sfondo.png',},
-	{target: gl.TEXTURE_CUBE_MAP_POSITIVE_Y, url: '../oggetti/sfondo.png',},
-	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, url: '../oggetti/sfondo.png',},
-	{target: gl.TEXTURE_CUBE_MAP_POSITIVE_Z, url: '../oggetti/sfondo.png',},
-	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, url: '../oggetti/sfondo.png',},
+	const faceInfos = [{target: gl.TEXTURE_CUBE_MAP_POSITIVE_X, url: '../oggetti/cielo.jpeg',},
+	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_X, url: '../oggetti/cielo.jpeg',},
+	{target: gl.TEXTURE_CUBE_MAP_POSITIVE_Y, url: '../oggetti/cielo.jpeg',},
+	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, url: '../oggetti/cielo.jpeg',},
+	{target: gl.TEXTURE_CUBE_MAP_POSITIVE_Z, url: '../oggetti/cielo.jpeg',},
+	{target: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, url: '../oggetti/cielo.jpeg',},
 	];
 
     faceInfos.forEach((faceInfo) => {
@@ -282,14 +282,4 @@ function parseOBJ(text) {
 
 	handler(parts, unparsedArgs); //gestisce gli argomenti che non hai gestito
 	}
-
-	/*
-	var arrayProva = [];
-	for (let n = 0; n < objPositions.length; n++){
-		arrayProva.push(objPositions[n][2]);
-	}
-
-	//console.log(getMaxOfArray(arrayProva));
-	//console.log(getMinOfArray(arrayProva));
-	*/
 }

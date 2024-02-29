@@ -24,14 +24,11 @@ let texture_win
 
 //Cordinate oggetti
 function setCoor(gl){
-    loadEnemy()
     loadGlasses()
-    loadCube()
     loadProvetta()
     loadPavimento()
-    loadFoto()
     loadSkybox()
-    loadMouse()
+    loadOcchio()
 }
 
 function loadPavimento(){
@@ -40,7 +37,7 @@ function loadPavimento(){
     const textureCoords= [0, 0, 1, 0, 0, 1, 1, 1];
     const arrays_floor= {
         position: {numComponents: 3, data: [-S, H, -S, S, H, -S, -S, H, S, S, H, S], },
-        textcoord: {numComponents: 2, data: textureCoords, },
+        texcoord: {numComponents: 2, data: textureCoords, },
         indices: {numComponents: 3, data:[0, 2, 1, 2, 3, 1, ],},
         normal: {numComponents: 3, data:[0, 1, 0,  0, 1, 0,  0, 1, 0,  0, 1, 0,],},
     };
@@ -49,75 +46,15 @@ function loadPavimento(){
     console.log("bufferInfo_pavimento", bufferInfo_pavimento)
 }
 
-function loadFoto(){
-    const position=[
-        -0.5, -0.5, -0.5,   -0.5, 0.5,-0.5,   0.5, -0.5, -0.5,   -0.5,  0.5, -0.5,    0.5, 0.5, -0.5,   0.5, -0.5, -0.5,
-        -0.5, -0.5,  0.5,   -0.5, 0.5, 0.5,   0.5, -0.5,  0.5,    0.5, -0.5,  0.5,   -0.5, 0.5,  0.5,   0.5,  0.5,  0.5,
-        -0.5,  0.5, -0.5,   -0.5, 0.5, 0.5,   0.5,  0.5, -0.5,   -0.5,  0.5,  0.5,    0.5, 0.5,  0.5,   0.5,  0.5, -0.5,
-        -0.5, -0.5, -0.5,    0.5,-0.5,-0.5,  -0.5, -0.5,  0.5,   -0.5, -0.5,  0.5,    0.5,-0.5, -0.5,   0.5, -0.5,  0.5,
-        -0.5, -0.5, -0.5,   -0.5,-0.5, 0.5,  -0.5,  0.5, -0.5,   -0.5, -0.5,  0.5,   -0.5, 0.5,  0.5,  -0.5,  0.5, -0.5,
-         0.5, -0.5, -0.5,    0.5, 0.5,-0.5,   0.5, -0.5,  0.5,    0.5, -0.5,  0.5,    0.5, 0.5, -0.5,   0.5,  0.5,  0.5,
-    ];
-    const normal=[
-        0, 0, -1,   0, 0, -1,   0, 0, -1,   0, 0, -1,   0, 0, -1,   0, 0, -1,
-        0, 0, 1,    0, 0, 1,    0, 0, 1,    0, 0, 1,    0, 0, 1,    0, 0, 1,
-        0, 1, 0,    0, 1, 0,    0, 1, 0,    0, 1, 0,    0, 1, 0,    0, 1, 0,
-        0, -1, 0,   0, -1, 0,   0, -1, 0,   0, -1, 0,   0, -1, 0,   0, -1, 0,
-        -1, 0, 0,   -1, 0, 0,   -1, 0, 0,   -1, 0, 0,   -1, 0, 0,   -1, 0, 0,
-        1, 0, 0,    1, 0, 0,    1, 0, 0,    1, 0, 0,    1, 0, 0,    1, 0, 0,
-    ];
-
-    const texcoor=[
-        1.0, 0.0,   0.0, 0.0,   1.0, 1.0,   0.0, 0.0,   0.0, 1.0,   1.0, 1.0,
-        1.0, 0.0,   1.0, 1.0,   0.0, 0,0,   0.0, 0.0,   1.0, 1.0,   0.0, 1.0,
-        1.0, 1.0,   1.0, 0.0,   0.0, 1.0,   1.0, 0.0,   0.0, 0.0,   0.0, 1.0,
-        0.0, 0.1,   1.0, 1.0,   0.0, 0.0,   0.0, 0.0,   1.0, 1.0,   1.0, 0.0,
-        1.0, 1.0,   1.0, 0.0,   0.0, 1.0,   1.0, 0.0,   0.0, 0.0,   0.0, 1.0,
-        0.0, 1.0,   1.0, 1.0,   0.0, 0.0,   0.0, 0.0,   1.0, 1.0,   1.0, 0.0,
-    ];
-
-    const arrays_foto={
-        position: {numComponents: 3, data: position},
-        textcoord: {numComponents: 2, data: texcoor,},
-        normale: {numComponents: 3, data: normal,},
-    }
-
-    bufferInfo_foto= webglUtils.createBufferInfoFromArrays(gl, arrays_foto);
-    texture_foto= loadTextureFromImg("../oggetti/sfondo.png")
-    texture_win= loadTextureFromImg("../oggetti/sfondo.png")
-}
-
-//sole 
-function loadEnemy(){
-    loadObj("../oggetti/sol/sol.obj")
-    const enemy_array={
-        position: {numComponents: 3, data: webglVertexData[0],},
-        texcoord: {numComponents: 2, data: webglVertexData[1],},
-        normal: {numComponents: 3, data: webglVertexData[2],},
-    }
-    bufferInfo_enemy= webglUtils.createBufferInfoFromArrays(gl, enemy_array)
-    texture_enemy= loadTextureFromImg("../oggetti/sol/2k_sun.jpg")
-}
-
 function loadGlasses(){
-    loadObj("../oggetti/Glasses.obj")
+    loadObj("../oggetti/nemico.obj")
     const glasses_array={
         position: {numComponents: 3, data: webglVertexData[0],},
         texcoord: {numComponents: 2, data: webglVertexData[1],},
         normal: {numComponents: 3, data: webglVertexData[2],},
     }
     bufferInfo_glasses= webglUtils.createBufferInfoFromArrays(gl, glasses_array)
-    texture_glasses= loadTextureFromImg("../oggetti/texOcchiali.jpg")
-}
-
-function loadCube(){
-    loadObj("../oggetti/cubeInternet.obj")
-    const array_cubo= {
-        position: {numComponents: 3, data: webglVertexData[0],},
-        texcoord: {numComponents: 2, data: webglVertexData[1],},
-        normal: {numComponents: 3, data: webglVertexData[2],},
-    }
-    bufferInfo_cube= webglUtils.createBufferInfoFromArrays(gl, array_cubo)
+    texture_glasses= loadTextureFromImg("../oggetti/fototessera.JPG")
 }
 
 function loadProvetta(){
@@ -128,19 +65,19 @@ function loadProvetta(){
         normal: {numComponents: 3, data: webglVertexData[2],},
     }
     bufferInfo_provetta= webglUtils.createBufferInfoFromArrays(gl, array_provetta)
-    texture_provetta= loadTextureFromImg("../oggetti/blue.jpeg")
+    texture_provetta= loadTextureFromImg("../oggetti/collirio.png")
 }
 
 //occhio
-function loadMouse(){
-    loadObj("../oggetti/eyeball.obj")
+function loadOcchio(){
+    loadObj("../oggetti/occhio.obj")
     const array_occhio= {
         position: {numComponents: 3, data: webglVertexData[0],},
         texcoord: {numComponents: 2, data: webglVertexData[1],},
         normal: {numComponents: 3, data: webglVertexData[2],},
     }
     bufferInfo_mouse= webglUtils.createBufferInfoFromArrays(gl, array_occhio)
-    texture_mouse= loadTextureFromImg("../oggetti/Eye_D.jpg")
+    texture_mouse= loadTextureFromImg("../oggetti/occhio.jpeg")
 }
 
 function loadSkybox(){

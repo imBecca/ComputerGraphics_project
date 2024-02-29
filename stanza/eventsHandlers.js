@@ -2,6 +2,8 @@ window.addEventListener("keydown", doKeyDown, true);
 window.addEventListener("keyup", doKeyUp, true);
 window.addEventListener("touchstart", doTouchDown, true);
 window.addEventListener("touchend", doTouchUp, true);
+window.addEventListener("click", checkButtonClick);
+window.addEventListener("wheel", zoom, { passive: false });
 
 var pointerX = -1;
 var pointerY = -1;
@@ -20,9 +22,9 @@ function zoom(event) {
 }
 
 function mouseDown(e) {
-  //console.log("mouseDown");
+  console.log("mouseDown");
   drag = true;
-  cameraLiberabis = true;
+  cameraL2 = true;
   (old_x = e.pageX), (old_y = e.pageY);
   e.preventDefault();
   return false;
@@ -30,7 +32,7 @@ function mouseDown(e) {
 
 function mouseUp(e) {
   drag = false;
-  //cameraLiberabis = false;
+  //cameraL2 = false;
 }
 
 function mouseMove(e) {
@@ -72,27 +74,27 @@ function doKeyDown(e) {
       break;
     case "ArrowUp":
       cameraPosition[1] += 0.14;
-      camera_posteriore=false;
+      cameraP=false;
       cambiaCamera=false;
-      cameraLiberabis = false;
+      cameraL2 = false;
       break;
     case "ArrowDown":
-      camera_posteriore=false;
+      cameraP=false;
       cameraPosition[1] -= 0.14;
       cambiaCamera=false;
-      cameraLiberabis = false;
+      cameraL2 = false;
       break;
     case "ArrowLeft":
-      camera_posteriore=false;
+      cameraP=false;
       cameraPosition[0] -= 0.14;
       cambiaCamera=false;
-      cameraLiberabis = false;
+      cameraL2 = false;
       break;
     case "ArrowRight":
-      camera_posteriore=false;
+      cameraP=false;
       cameraPosition[0] += 0.14;
       cambiaCamera=false;
-      cameraLiberabis = false;
+      cameraL2 = false;
       break;
     default:
       return;
@@ -156,31 +158,31 @@ function doTouchDown(e) {
   // THE up KEY
   if (x >= 640 && y >= 351 && x <= 700 && y <= 417) {
     cameraPosition[1] += 1;
-    camera_posteriore=false;
+    cameraP=false;
     cambiaCamera=false;
-    cameraLiberabis = false;
+    cameraL2 = false;
     //console.log("cameralibera" + cameraLibera);
   }
   // THE down KEY
   if (x >= 640 && y >= 439 && x <= 700 && y <= 500) {
     cameraPosition[1] -= 1;
-    camera_posteriore=false;
+    cameraP=false;
     cambiaCamera=false;
-    cameraLiberabis = false;
+    cameraL2 = false;
   }
   // THE left KEY
   if (x >= 556 && y >= 438 && x <= 617 && y <= 503) {
     cameraPosition[0] -= 1;
-    camera_posteriore=false;
+    cameraP=false;
     cambiaCamera=false;
-    cameraLiberabis = false;
+    cameraL2 = false;
   }
   // THE right KEY
   if (x >= 724 && y >= 440 && x <= 785 && y <= 504) {
     cameraPosition[0] += 1;
-    camera_posteriore=false;
+    cameraP=false;
     cambiaCamera=false;
-    cameraLiberabis = false;
+    cameraL2 = false;
   }
 }
 
@@ -197,22 +199,42 @@ function doTouchUp(e) {
   if (x >= 274 && y >= 440 && x <= 335 && y <= 504) key[3] = false;
 }
 
-window.addEventListener("click", checkButtonClick);
+
 
 function checkButtonClick(e) {
   x = e.pageX - canvas.offsetLeft;
   y = e.pageY - canvas.offsetTop;
   //retry button
   if (x >= 490 && x <= 650 && y >= 178 && y <= 236 && morte == true) {
-    initMouse();
+    initOcchio();
     morte= false;
     cambiaCamera= false;
     cameraLiberabis= false;
     cameraA= false;
     provetta1= false;
     provetta2= false;
+    provetta3= false;
+    webglLessonsUI.setupSlider("#LightX", {value: 10, slide: updateLightx, min: 0,max: 450, step: 1,});
+    webglLessonsUI.setupSlider("#LightY", {value: 200,slide: updateLighty,min: 100, max: 450,step: 1,});
+    webglLessonsUI.setupSlider("#LightZ", {value: 250,slide: updateLightz,min: 100,max: 350, step: 1,});
+    x_light= 10;
+    y_light= 200;
+    z_light= 250;
+    cambiaCamera= false;
+    cameraL2= false;
+    cameraA= false; 
+    cameraL= false;
+    cameraP=true;
+  }else if(x >= 490 && x <= 650 && y >= 178 && y <= 236 && vittoria == true){
+    initOcchio();
+    vittoria= false;
+    cambiaCamera= false;
+    cameraLiberabis= false;
+    cameraA= false;
+    provetta1= false;
     provetta2= false;
-    webglLessonsUI.setupSlider("#LightX", {value: 270, slide: updateLightx, min: 0,max: 450, step: 1,});
+    provetta3= false;
+    webglLessonsUI.setupSlider("#LightX", {value: 10, slide: updateLightx, min: 0,max: 450, step: 1,});
     webglLessonsUI.setupSlider("#LightY", {value: 200,slide: updateLighty,min: 100, max: 450,step: 1,});
     webglLessonsUI.setupSlider("#LightZ", {value: 250,slide: updateLightz,min: 100,max: 350, step: 1,});
     x_light= 10;
@@ -225,3 +247,5 @@ function checkButtonClick(e) {
     cameraP=true;
   }
 }
+
+  
