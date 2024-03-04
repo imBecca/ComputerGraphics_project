@@ -5,6 +5,7 @@ window.addEventListener("touchend", doTouchUp, true);
 window.addEventListener("click", checkButtonClick);
 window.addEventListener("wheel", zoom, { passive: false });
 
+
 var pointerX = -1;
 var pointerY = -1;
 document.onmousemove = function (event) {

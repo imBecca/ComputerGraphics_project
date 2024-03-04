@@ -207,10 +207,10 @@ function drawScene(projectionMatrix, camera, textureMatrix, lightWorldMatrix, pr
     drawGlasses(programInfo, time);
     drawGlasses2(programInfo, time);
     if(provetta1 == 0){
-        drawProvetta(programInfo, time);
+       drawProvetta(programInfo, time);
     }
     if(provetta2 == 0){
-        drawProvetta2(programInfo, time);
+       drawProvetta2(programInfo, time);
     }
     if(provetta3 == 0){
         drawProvetta3(programInfo, time);

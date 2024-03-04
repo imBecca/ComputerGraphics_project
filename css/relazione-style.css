@@ -1,0 +1,29 @@
+/* CSS per la relazione del progetto */
+h1 {
+  color: rgb(53, 109, 62);
+  font-size: 50px;
+}
+h2{
+    color: rgb(232, 113, 21);
+    font-size: 35px;
+}
+h1, h2, h3 {
+  position: relative;
+  text-align: center;
+}
+p, ul, li {
+  margin-left: 40px;
+  margin-right: 40px;
+  font-size: 20px;
+}
+body {
+  background-color: white;
+}
+div {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+img {
+  margin: 5px;
+}

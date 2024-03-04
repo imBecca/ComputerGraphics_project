@@ -99,19 +99,7 @@ function occhioDoStep() {
             morte=1;
             
 		}
-
-    /*   if (posX >= 6 && posX <= 18
-            && posZ >= -16 && posZ <= -4) {
-                morte=1;
-                
-            }
-
-     /*if (posX >= 3 && posX <= 17.5
-        && posZ >= 23 && posZ <= 36.5) {
-            morte=1;
-            
-        }*/
-
+        
     if (posX >= -5.5 && posX <= 5
         && posZ >= -15 && posZ <= -4
         && provetta1==true && provetta2==true && provetta3==true) {

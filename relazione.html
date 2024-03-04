@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>Relazione - Salva l'Occhio!</title>
+        <link rel="stylesheet" href="css/relazione-style.css">
+    </head>
+    <body>
+        <h1>Progetto di Fondamenti di Computer Graphics</h1>
+        <h2>Salva l'Occhio</h2>
+        <h3>Francesco Saverio Beccafichi - 1052139 francesco.beccafichi@studio.unibo.it <br>
+                Laurea Magistrale in Informatica AA 2023/2024
+        </h3>
+        <div>
+			<img src="imgs/home.png" height="460" >
+		</div>
+        <h3>Introduzione</h3>
+        <p>
+            Come tutti gli anni è periodo di allergia, ma per evitare rossori e prurito l'occhio deve essere protetto. Per questo cerca di raccogliere tutte le confezioni di collirio in modo da evitare di avere problemi. Attenzioni ai cubi rotanti dove riesiede il cattivo che ti ruberà le confezioni di collirio. Non è che è proprio lui a causare l'allergia? 
+            <br>
+            Lo scopo del gioco è quello di raccogliere tutte le confezioni di collirio evitando la collisione con i cubi rotanti, che faranno ricominicare la partita dall'inizio.
+        </p>
+        <h3>Ambientazione</h3>
+        <p>
+            La realizzazione della scena è stata fatta utilizzando diverse tecniche, che combinate assiame hanno permesso di rendere la scena più viva possibile. Alla base di tutto, è stato creato un piano, che rappresenta il terreno su cui si può muovere il personaggio, infatti se supera i limiti verrà visualizzata la schermata di game over, su cui è stata applicata una texture di un sentiero erboso, in modo da creare un ambientazione piacevole.
+            <div>
+                <img src="imgs/ambientazione.png" height="460" >
+            </div>
+        </p>
+        <p>
+            Tutto intorno al piano, come sfondo, è stato creato una uno skybox, attraverso un cubo texturizzato con un immagine dello spazio. La texture è stata applicata a tutte le facce del cubo, cercando di creare un effetto di continuità, in modo da dare l'idea di essere in uno spazio aperto.
+        </p>
+        <h3>Mesh e Texture</h3>
+        <p>
+            Le mesh utilizzate nella scena sono state tutte create attravero il programma di modellazione 3D Blender.
+            <br>
+            Il personaggio principale, ovvero l'occhio, è una semplice mesh sferica, smussata per renderla più simile ad un occhio umano. La mesh è stata texturizzata con un immagine di una pupilla, la rese nella scena perde un po' il dettaglio che si ha su Blender ma comunque è accettabile. Migliore è la resa sui nemici, in quanto essendo dei cubi su cui è stata applicata una texture di una fototessera, il risultato rispetta le aspettative.<br>
+            <div>
+                <img src="imgs/occhio.png" height="460" >
+                <img src="imgs/nemico.png" height="460" >
+            </div>
+        </p>
+        <p>
+            <br>
+            Per quanto rigurda le confezioni di collirio, sono state utilizziate delle mesh cilindiriche, con la parte relativa al tappo scalata e ridmensionata rispetto al corpo, in modo da creare l'effetto di una confezione. Alla mesh è stata applicata una texture di un'etichetta di un farmaco visibile in un unica parte del corpo cilindrico e tutto il resto del corpo rimane di un colore bianco neutro
+            <br>
+        </p>
+            <div>
+                <img src="imgs/collirio.png" height="460" >
+            </div>
+            <br>
+        <p>
+            Le mesh poi esportate da Blender in formato <i>.obj</i> sono state importate nella scena attravero la funzione <i>loadObj</i>, presente nel file <i>utils.js</i>. Infine gli oggetto sono stati animati, facendoli ruotare sull asse y, i colliri, mentre asse y e z, i cubi nemici. Tutto diverso per quanto rigurda l'occhio che verrà trattato in seguito.
+            <br>
+            Per quanto riguarda le texture, sono state create attraverso le funzioni di WebGL, in particolare attraverso le funzioni "<i>gl.createTexture()</i>" e "<i>gl.TextImage2D()</i>", che permette, quando possibile, di applicare la tecnica del "<i>mipmap</i>" oppure vengono settati parametri standard per la sua gestione. La texture del collirio è stata ribaltata volutamente, cercando di rendere il farmaco realistico, senza avere problemi di copyright. I nemici, infine, sono stati texturizzati con una foto personale, come richiesto dalla consegna.
+            <br>
+        </p>
+        <h3>Illuminazione</h3>
+        <p>
+            Il mondo è stato illuminato attraveso una luce posta nella sommità della scena, cercando di ricreare una luce quanto più naturale. La luce utilizzata è una luce direzionale, che utilizza le coordinate di profondità fornite dalla <i>depth_texture</i> riesce a determinare gli oggetti che vengono colpiti se siano in ombra o meno. L'utente ha la possibilità di modificare la posizione della luce, infatti grazie a degli slider posti nel pannello di controllo nella parte destra della pagina, si può andare a modificare la direzione della luce rispetto agli assi x, y e z. Sempre dal pannello di controllo è possibile selezione se attivare le ombre prodotte dalla luce, oppure decidere se utilizzare una scena priva di ombre.<br>
+            Per quanto possibile si è cercato di limitare l'effetto "shadow acne" attraverso l'utilizzo di un bias fisso.<br>
+            Il problema principale causato da questo tipo di Illuminazione sono le ombre, in quanto l'effetto restituito non è molto realistico perchè la resa visiva è molto pixelata, ma comunque accettabile. Per migliorare questo problema, si potrebbe utilizzare un algorimo di shading più complesso, che permette di avere un effetto più realisto, ma al costo di un carico computazionele più elevato che potrebbe compromettere la fluidità del gioco.<br>
+        </p>
+        <div>
+            <img src="imgs/ombre.png" height="460" >
+        </div>
+        <h3>Animazioni</h3>
+        <p>
+            Il movimento dell'occhio nella scena viene gestito dal file <i>eyeMoviment.js</i>, dopo aver preso spunto dal file <i>cg-car2.js</i> fornitoci a lezione. La fisica utilizzata dall'occhio per muoversi è molto simile a quella di una macchina con l'unica differeza che non deve essere gestito il movimento delle ruote. Il movimento dell'occhio nella mappa è caratterizzato da due tipi di collisioni:
+                <ul>
+                    <li>Collisone con il Collirio.</li>
+                    <li>Collisone con i cubi nemici.</li>
+                </ul>
+        </p>
+        <p>
+            Per capire quando si entra in collisione con gli oggetti presenti nella scena, sono state utilizzatte le coordinate x, y e z dell'occhio e degli oggetti, in modo da capire quando si sovrappongono, ed in base al tipo di oggetti avverrà una determinata azione. Nel caso in cui si entri in collisione con un collirio, l'oggetto scomparirà dalla scena e si notificherà all'utente la raccolta di quest'ultimo nel cavans di testo. Mentre nel caso in cui si entra in contatto con un nemico si visualizzerà la schermata di game over.<br>
+        </p>
+        <div>
+            <img src="imgs/provettasi.png" height="460" >
+            <img src="imgs/provettano.png" height="460" >
+        </div><br>
+        <p>    
+            Gli oggetti nella scena sono anch'essi animati, indatti i colliri ruotato nel loro asse y, attraverso la funzione <i>yRotate(m, angeleInRadians, dst)</i>, mentre i cubi ruotano sul loro asse x, y e z, sempre con le relative funzioni di rotazione. Le rotazioni sono possibili tramite la libreria <i>m4.js</i> dove sono presenti i metodi per la rotazione degli oggetti tramite la rotazione di una matrice in base ai suoi assi.
+        </p>
+        <h3>Interazione con l'interfaccia</h3>
+        <p>
+            L'utente ha la possibilità di interagire con l'interfaccia attrvarso mouse e tastiera. L'interfaccia presenta un canvas in cui viene renderizzata tutta la scena, e un altro canvas in cui vengono visualizzate le statistiche e le istruzioni di gioco. L'utente per muovere l'occhio deve utilizzare i tasti W, A, S e D per andare rispettivamente avanti, a sinistra, a destra e indietro. Inoltre utilizzando le freccie direzionali, l'utente ha la possibilità di muovere la camera, che si distaccherà dal target(l'occhio) e rimarrà fissa in base alla posizione decisa dall'utente ma comunque continuando a seguire il target. La camera può essere spostata anche attraverso i pulsanti presenti nel pannello di controllo, decidendo se posizionarla dietro o davanti all'occhio in modo che le segua in ogni suo spostamento, oppure vendendo la scena dall'alto per vedere in modo chiaro e distaccato tutta la scena. In modalità camera posteriore e anteriore, l'utente ha la possibilità di modificare la distanza tra la camera e l'occhio, attraverso la rotella del mouse.
+        </p>
+        <div>
+            <img src="imgs/generale.png" height="460" >
+        </div>
+        <p>
+            Non è stata prevista una versione mobile, ma con alcuni accorgimenti si potrebbe rendere il gioco fruibile anche su dispositivi mobili, come ad esempio la gestione del movimento dell'occhio attraverso il touch screen, oppure la gestione della camera attraverso dei comandi presenti sullo schermo del dispositivo.
+        </p>
+        <h3>Funzionalità WebGL</h3>
+        <p>
+            Come già accennato sono state utilizzate diverse librerie come supporto. Le librerie in questione "webgl-lessons-ui.js" e "m4.js" sono state riprese dalle lezioni e sfruttate per velocizzare la scrittura del codice. La prima principalmente usata in maniera facile e veloce per inserire lo slider nel canvas ha grandi potenzialità nell'interazione con l'utente. Mentre la seconda è stata usata per semplificare molti calcoli tra matrici, fondamentali nello sviluppo del codice.
+        </p>
+    </body>
+</html>
